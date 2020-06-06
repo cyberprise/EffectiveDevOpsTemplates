@@ -43,7 +43,7 @@
                 "GroupDescription": "Allow SSH and TCP/3000 access",
                 "SecurityGroupIngress": [
                     {
-                        "CidrIp": "0.0.0.0/0",
+                        "CidrIp": "116.193.159.210/32",
                         "FromPort": "22",
                         "IpProtocol": "tcp",
                         "ToPort": "22"
@@ -60,7 +60,7 @@
         },
         "instance": {
             "Properties": {
-                "ImageId": "ami-0970010f37c4f9c8d",
+                "ImageId": "ami-a4c7edb2",
                 "InstanceType": "t2.micro",
                 "KeyName": {
                     "Ref": "KeyPair"
@@ -76,13 +76,10 @@
                             "\n",
                             [
                                 "#!/bin/bash",
+                                "sudo yum install --enablerepo=epel -y nodejs",
                                 "wget http://bit.ly/2vESNuc -O /home/ec2-user/helloworld.js",
-                                "wget http://bit.ly/2vVvT18 -O /home/ec2-user/etcinit-helloworld.conf",
-                                "wget http://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh",
-                                ". ~/install.sh",
-                                ". ~/.nvm/nvm.sh",
-                                "nvm install node",
-                                "node helloworld.js"
+                                "wget http://bit.ly/2vVvT18 -O /etc/init/helloworld.conf",
+                                "start helloworld"
                             ]
                         ]
                     }
